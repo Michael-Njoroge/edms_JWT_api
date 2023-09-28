@@ -11,14 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('work_steps', function (Blueprint $table) {
             $table->id();
-            $table->string('username');
-            // $table->string('guid');
-            // $table->string('password');
-            $table->string('name');
-            // $table->string('email')->nullable();
+            $table->string('workstep_type');
+            $table->unsignedBigInteger('previous');
+            $table->unsignedBigInteger('folder_id');
+            $table->string('activity');
             $table->timestamps();
+
+            $table->foreign('folder_id')->references('id')->on('folders')->onDelete('cascade');
+
         });
     }
 
@@ -27,6 +29,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('work_steps');
     }
 };
+

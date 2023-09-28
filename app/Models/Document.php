@@ -33,10 +33,10 @@ class Document extends Model
     /**
      * Get the doc_fields for the folder.
      */
-    // public function doc_fields(): HasMany
-    // {
-    //     return $this->hasMany(DocField::class);
-    // }
+    public function doc_fields(): HasMany
+    {
+        return $this->hasMany(DocField::class);
+    }
 
     /**
      * Get the fields for the document.
@@ -44,5 +44,13 @@ class Document extends Model
     public function fields(): BelongsToMany
     {
         return $this->belongsToMany(Field::class, 'doc_fields');
+    }
+
+    /**
+     * Get the workstep_results for the document.
+     */
+    public function workstep_results(): HasMany
+    {
+        return $this->hasMany(WorkStepResult::class);
     }
 }
